@@ -1,0 +1,22 @@
+.cache
+__pycache__
+*.egg-info
+.ipynb_checkpoints
+*.pyc
+*.pyo
+.tox
+dist
+build
+private
+restats
+myvenv
+.vscode 
+
+# Coverage reports
+.coverage
+.coverage.*
+
+# editor 
+.idea
+.project
+.pydevproject
