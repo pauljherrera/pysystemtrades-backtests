@@ -10,7 +10,6 @@ build
 restats
 myvenv
 .vscode 
-
 # Coverage reports
 .coverage
 .coverage.*
