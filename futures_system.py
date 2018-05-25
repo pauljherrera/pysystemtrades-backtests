@@ -1,4 +1,3 @@
-
 import pandas as pd
 from pprint import pprint
 from matplotlib import pyplot as plt
@@ -23,16 +22,21 @@ info = {}
 
 for item in instruments:
     series = []
-    series.append(data.get_raw_price(item))
+    series.append(data.daily_prices(item))
     series.append(system.accounts.get_buffered_position(item))
+    series.append(system.combForecast.get_combined_forecast(item))
+    series.append(portfolio.to_frame()[item])
     series.append(portfolio.to_frame()[item].cumsum())
 
 
     df = pd.concat( series, axis = 1)
-    df = df.rename(columns = {0 : 'buffered Position',item:'Profit&Loss'})
+    df = df.rename(columns = {0 : 'Position',item:'Profit&Loss',1:'combinedForecast'})
+    path = 'backtest-data/'+item+'.csv'
+    df.to_csv(path,sep=',')
+    
     info[item] = df
+    
     print(info[item])
-
 
 #Showing useful plots and stats.
 
@@ -46,7 +50,6 @@ portfolio.cumulative().curve().plot()
 plt.title("Compounded profits and loss curve for the complete portfolio:")
 plt.show()
 
-
 print("\n\nProfits and loss curve for each one of the assets:")
 portfolio.to_frame().cumsum().plot()
 plt.title("Profits and loss curve for each one of the assets:")
@@ -54,10 +57,8 @@ plt.show()
 
 print("\n\nDrawdown chart:")
 portfolio.drawdown().plot()
-
 plt.title("Drawdown chart:")
 plt.show()
 
 print("\n\nBacktest stats:")
 pprint(system.accounts.portfolio().stats())
-

@@ -10,7 +10,7 @@ from sysdata.configdata import Config
 
 from systems.forecasting import Rules
 from systems.basesystem import System
-from systems.forecast_combine import ForecastCombine
+from systems.forecast_combine import ForecastCombineMaybeThreshold
 from systems.forecast_scale_cap import ForecastScaleCap
 from systems.rawdata import RawData
 from systems.positionsizing import PositionSizing
@@ -49,7 +49,7 @@ def futures_system(data=None,
 
     system = System([
         Account(), Portfolios(), PositionSizing(), RawData(),
-        ForecastCombine(), ForecastScaleCap(), rules
+        ForecastCombineMaybeThreshold(), ForecastScaleCap(), rules
     ], data, config)
 
     system.set_logging_level(log_level)

@@ -93,10 +93,10 @@ instrument_weight_estimate:
 # Capital correction
 #
 percentage_vol_target: 20.0
-notional_trading_capital: 2500000
+notional_trading_capital: 5000
 base_currency: "USD"
 #
 # Portfolio creation
 #
-instruments: ['EDOLLAR','CORN']
-
+instruments: ['BUND','EDOLLAR','CORN']
+instruments_with_threshold : ['BUND',CORN']
